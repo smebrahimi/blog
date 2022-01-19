@@ -8,6 +8,7 @@
           single-line
           rounded
           label="Search"
+          @input="filterPosts()"
           prepend-inner-icon="mdi-magnify"
         ></v-text-field>
         <Button icon="mdi-plus-circle" text="Add new post" to="/add" />
@@ -33,6 +34,7 @@
 <script>
 import Card from "../components/Card";
 import Button from "../components/Button";
+import _ from "lodash";
 
 export default {
   name: "Home",
@@ -56,8 +58,11 @@ export default {
     this.getPosts();
   },
   methods: {
-    getPosts() {
+    filterPosts: _.debounce(function () {
       this.$store.dispatch("getPosts", { q: this.search });
+    }, 1000),
+    getPosts() {
+      this.$store.dispatch("getPosts");
     },
     loadMore() {
       this.page++;
@@ -68,7 +73,5 @@ export default {
 
 <style scoped>
 .v-input__control {
-  width: rem(316px);
-  height: rem(40px);
 }
 </style>

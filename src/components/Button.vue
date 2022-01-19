@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "Tag",
+  name: "Button",
   props: {
     text: {
       type: String,
@@ -26,10 +26,6 @@ export default {
     icon: {
       type: String,
       default: ''
-    },
-    isRemove: {
-      type: Boolean,
-      default: false,
     },
   },
   methods: {

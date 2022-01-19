@@ -15,7 +15,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getPosts: ({commit, params}) => {
+    getPosts: ({commit}, params) => {
+      console.log(params)
       axios.get('/posts?_expand=user', {params: params})
         .then((response) => {
           commit('SET_POSTS', response.data);
