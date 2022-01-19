@@ -1,0 +1,30 @@
+@import "./functions.scss";
+@import "./variables.scss";
+
+.p-a-12 {
+    padding: rem(12px);
+}
+.p-y-10 {
+    padding: rem(10px) 0;
+}
+.m-r-2 {
+    margin-right: rem(2px) !important;
+}
+.m-b-2 {
+    margin-bottom: rem(2px) !important;
+}
+.theme--light.v-text-field>.v-input__control>.v-input__slot:before {
+    border-color: #90C143;
+}
+.v-text-field {
+    .v-input__control {
+        .v-input__slot {
+            border: rem(1px) solid $border-normal-color !important;
+            font-size: 0.875rem !important;
+        }
+    }
+}
+.v-label {
+    // font-size: .875rem !important;
+    color: $text-normal-color !important;
+  }
