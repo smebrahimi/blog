@@ -65,7 +65,6 @@ export default {
   methods: {
     onSubmit() {
       this.form.tags = this.$refs.tags?.tags;
-      console.log(this.form);
       this.$store.dispatch("addPost", this.form);
     },
   },

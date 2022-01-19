@@ -7,25 +7,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    posts: []
+    posts: [],
+    isLoading: false
   },
   mutations: {
     SET_POSTS: (state , payload) => {
       state.posts = payload;
+    },
+    SET_LOADING: (state, payload) => {
+      state.isLoading = payload
     }
   },
   actions: {
-    getPosts: ({commit}, params) => {
+    getPosts: async ({commit}, params) => {
       console.log(params)
-      axios.get('/posts?_expand=user', {params: params})
+      await axios.get('/posts?_expand=user', {params: params})
         .then((response) => {
           commit('SET_POSTS', response.data);
         })
         .catch()
     },
-    addPost: ({payload}) => {
-      axios.post('/posts', payload)
+    addPost: async ({commit}, payload) => {
+      commit('SET_LOADING', true);
+      await axios.post('/posts', payload)
       .then((response) => {
+        commit('SET_LOADING', false);
         return response.data;
       })
       .catch()
