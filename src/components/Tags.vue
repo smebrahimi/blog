@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="text-caption">Tags</label>
-    <v-text-field v-model="tag" hide-details v-bind="$attrs" outlined>
+    <v-text-field v-model="tag" hide-details v-bind="$attrs" solo flat>
       <template v-slot:append>
         <v-btn icon @click="onAdd">Add <v-icon>{{ icon }}</v-icon></v-btn>
       </template>

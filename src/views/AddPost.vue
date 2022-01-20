@@ -18,7 +18,9 @@
           <v-col cols="12">
             <v-text-field
               v-model="form.title"
-              outlined
+              solo
+              flat
+              hide-details
               single-line
               full-width
             ></v-text-field>
@@ -30,8 +32,10 @@
           </v-col>
           <v-col cols="12">
             <v-textarea
-              v-model="form.description"
-              outlined
+              v-model="form.text"
+              solo
+              flat
+              hide-details
               full-width
             ></v-textarea>
           </v-col>
@@ -57,7 +61,7 @@ export default {
       form: {
         publishDate: null,
         title: "",
-        description: "",
+        text: "",
         tags: [],
       },
     };
@@ -65,6 +69,7 @@ export default {
   methods: {
     onSubmit() {
       this.form.tags = this.$refs.tags?.tags;
+      this.publishDate = new Date;
       this.$store.dispatch("addPost", this.form);
     },
   },
