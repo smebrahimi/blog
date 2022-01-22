@@ -1,23 +1,20 @@
 <template>
   <v-container class="mt-16">
     <v-card elevation="0" width="1010" class="mx-auto">
-      <v-row align="center" justify="space-between" no-gutters>
-        <v-col cols="4">
-          <v-text-field
-            v-model="search"
-            solo
-            flat
-            single-line
-            rounded
-            hide-details
-            label="Search"
-            @input="filterPosts()"
-            prepend-inner-icon="mdi-magnify"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="8" justify="end">
-          <Button icon="mdi-plus-circle" text="Add new post" to="/add" />
-        </v-col>
+      <v-row class="my-6" no-gutters align="start" justify="space-between">
+        <v-text-field
+          class="search-field"
+          v-model="search"
+          solo
+          flat
+          single-line
+          rounded
+          hide-details
+          label="Search"
+          @input="filterPosts()"
+          prepend-inner-icon="mdi-magnify"
+        ></v-text-field>
+        <Button icon="mdi-plus-circle" text="Add new post" to="/add" />
       </v-row>
       <v-row>
         <v-col
@@ -51,17 +48,20 @@ export default {
   data() {
     return {
       count: 5,
-      page: 1,
+      pages: 1,
       search: "",
     };
   },
   computed: {
     posts() {
-      return this.$store.getters["posts"](this.page * this.count);
+      return this.$store.getters["posts"](this.pages * this.count);
     },
   },
   created() {
     this.getPosts();
+  },
+  destroyed() {
+    this.$store.dispatch("setPosts", []);
   },
   methods: {
     filterPosts: _.debounce(function () {
@@ -71,8 +71,16 @@ export default {
       this.$store.dispatch("getPosts");
     },
     loadMore() {
-      this.page++;
+      this.pages++;
     },
   },
 };
 </script>
+
+<style lang="scss">
+@import "@/assets/styles/main.scss";
+
+.search-field {
+  max-width: rem(316px) !important;
+}
+</style>

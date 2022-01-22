@@ -18,11 +18,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getPosts: async ({commit}, params) => {
-      console.log(params)
+    setPosts: ({commit}, payload) => {
+      commit('SET_POSTS', payload);
+    },
+    getPosts: async ({dispatch}, params) => {
       await axios.get('/posts?_expand=user', {params: params})
         .then((response) => {
-          commit('SET_POSTS', response.data);
+          dispatch('setPosts', response.data);
         })
         .catch()
     },
